@@ -57,18 +57,45 @@ const FromCSV = () => {
 
 
   return (
-    <div>
-        <Navbar />
-      <h1>CSV to SQL converter</h1>
-      <p>
-        Upload a csv file or paste your spreadsheet data into this tool. 
-        This site generate SQL CREATE TABLE and INSERT INTO TABLE statements that you can copy to your clipboard or download as a file.
-        Run the SQL statements in your warehouse and start querying your data.
-      </p>
-      <Filemenu sqlContent={sqlContent} handleUpload={handleUpload} handleCopy={handleCopy} handleDownload={handleDownload} handlePaste={handlePaste} fileExtension={".csv"} />
-      <br/>
-      <TextArea placeholder="Your SQL script will appear here..." sqlContent={sqlContent} />
-      <AreaForPaste isOpen={isModalOpen} onClose={onClose} setSqlContent={setSqlContent} />
+    <div className="from-csv-page">
+      <Navbar />
+      <div className="from-csv-content">
+        <div className="from-csv-header">
+          <h1 className="from-csv-title">CSV to SQL</h1>
+          <p className="from-csv-description">
+            Upload a CSV file or paste your spreadsheet data into this tool.
+            This app generates SQL <code>CREATE TABLE</code> and{" "}
+            <code>INSERT INTO</code> statements that you can copy or download.
+            Run the SQL in your database and start querying your data.
+          </p>
+        </div>
+
+        <div className="from-csv-sections">
+          <div className="from-csv-card filemenu-section">
+            <Filemenu
+              sqlContent={sqlContent}
+              handleUpload={handleUpload}
+              handleCopy={handleCopy}
+              handleDownload={handleDownload}
+              handlePaste={handlePaste}
+              fileExtension=".csv"
+            />
+          </div>
+
+          <div className="from-csv-card textarea-section">
+            <TextArea
+              placeholder="Your SQL script will appear here..."
+              sqlContent={sqlContent}
+            />
+          </div>
+        </div>
+      </div>
+
+      <AreaForPaste
+        isOpen={isModalOpen}
+        onClose={onClose}
+        setSqlContent={setSqlContent}
+      />
     </div>
   );
 };

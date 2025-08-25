@@ -16,6 +16,7 @@ const Navbar = () => {
                     <Link to="/from-excel" className="navbar-link">Import from Excel</Link>
                 </li>
             </ul>
+            
         </nav>
     );
 };
