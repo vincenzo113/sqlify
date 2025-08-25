@@ -28,7 +28,13 @@
   box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* leggera profondità */
 }
 
-.menu-button:hover,
+.menu-button:disabled:hover {
+  background-color: #e0e0e0;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+.menu-button:not(:disabled):hover,
 .menu-button:focus {
   background-color: #1a73e8;
   color: #ffffff;
