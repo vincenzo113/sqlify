@@ -22,11 +22,22 @@ const FromCSV = () => {
     const handleUpload = (event) => {
         const file = event.target.files[0];
         Papa.parse(file, {
-            header: true,
-            complete: function(results) {
-                setSqlContent(retrieveSQLfromCSV(results.meta.fields , results.data ));
-            }
+  header: true,
+  complete: function(results) {
+    const cleanedData = results.data
+      .map(row => {
+        const newRow = {};
+        Object.keys(row).forEach(key => {
+          newRow[key] = row[key].trim() === "" ? null : row[key]; // rimuove anche spazi
         });
+        return newRow;
+      })
+      // Rimuove righe completamente vuote
+      .filter(row => Object.values(row).some(value => value !== null));
+
+    setSqlContent(retrieveSQLfromCSV(results.meta.fields, cleanedData));
+  }
+});
     };
 
     const handleCopy = () => {
