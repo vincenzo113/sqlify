@@ -1,0 +1,33 @@
+
+
+.file-menu {
+  border: 1px solid #d0d0d0;
+  border-radius: 5px;
+  padding: 10px 16px;
+  margin: 12px 0;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  display: inline-block;
+}
+
+.menu-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.menu-button {
+  border: 1px solid #b0b0b0;
+  border-radius: 4px;
+  padding: 6px 16px;
+  font-size: 1rem;
+  background: none;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+  margin: 0;
+}
+
+.menu-button:hover,
+.menu-button:focus {
+  border-color: #888;
+  color: #1a73e8;
+  outline: none;
+}
