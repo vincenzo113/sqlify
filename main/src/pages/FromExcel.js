@@ -7,9 +7,13 @@ import * as XLSX from "xlsx";
 import TextArea from "../components/TextArea";
 import "../style/pages/FromExcel.css";
 
+
 const FromExcel = () => {
   const [sqlContent, setSqlContent] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [sheetNames, setSheetNames] = useState([]);
+  const [selectedSheet, setSelectedSheet] = useState("");
+  const [workbook, setWorkbook] = useState(null);
 
   const onClose = () => {
     setIsModalOpen(false);
@@ -22,17 +26,31 @@ const FromExcel = () => {
     reader.onload = (evt) => {
       const bstr = evt.target.result;
       const wb = XLSX.read(bstr, { type: "binary" });
-      const wsname = wb.SheetNames[0];
-      const ws = wb.Sheets[wsname];
+      setWorkbook(wb);
+      setSheetNames(wb.SheetNames);
+      setSelectedSheet(wb.SheetNames[0]);
 
+      // Generate SQL for the first sheet by default
+      const ws = wb.Sheets[wb.SheetNames[0]];
       const dataObjects = XLSX.utils.sheet_to_json(ws);
       const headers = dataObjects.length > 0 ? Object.keys(dataObjects[0]) : [];
-
       const sql = retrieveSQLfromCSV(headers, dataObjects);
       setSqlContent(sql);
     };
 
     reader.readAsBinaryString(file);
+  };
+
+  const handleSheetChange = (e) => {
+    const sheet = e.target.value;
+    setSelectedSheet(sheet);
+    if (workbook && workbook.Sheets[sheet]) {
+      const ws = workbook.Sheets[sheet];
+      const dataObjects = XLSX.utils.sheet_to_json(ws);
+      const headers = dataObjects.length > 0 ? Object.keys(dataObjects[0]) : [];
+      const sql = retrieveSQLfromCSV(headers, dataObjects);
+      setSqlContent(sql);
+    }
   };
 
   const handleCopy = () => {
@@ -46,6 +64,7 @@ const FromExcel = () => {
   const handlePaste = () => {
     setIsModalOpen(true);
   };
+
 
   return (
     <div className="from-excel-page">
@@ -74,6 +93,23 @@ const FromExcel = () => {
           </div>
 
           <div className="from-excel-card textarea-section">
+
+            {sheetNames.length > 1 && (
+              <div className="from-excel-sheet-select" style={{ marginBottom: '1.5rem', textAlign: 'center' }}>
+                <label htmlFor="sheet-select" style={{ color: '#000', fontWeight: 600, marginRight: 8 }}>Select sheet:</label>
+                <select
+                  id="sheet-select"
+                  value={selectedSheet}
+                  onChange={handleSheetChange}
+                  style={{ padding: '0.5rem', borderRadius: 4 }}
+                >
+                  {sheetNames.map((name) => (
+                    <option key={name} value={name}>{name}</option>
+                  ))}
+                </select>
+              </div>
+            )}
+
             <TextArea
               placeholder="Your SQL script will appear here..."
               sqlContent={sqlContent}
