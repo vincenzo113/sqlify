@@ -3,6 +3,11 @@ import {BrowserRouter as Router , Route , Routes} from "react-router-dom";
 import FromCSV from "./pages/FromCSV";
 import FromExcel from "./pages/FromExcel";
 import Home from "./pages/Home";
+import FromJSON from "./pages/FromJSON";  
+
+
+
+
 import './style/App.css'
 function App() {
   return (
@@ -11,6 +16,7 @@ function App() {
           <Route path="/" element={<Home/>}/>
           <Route path="/from-csv" element={<FromCSV />} />
           <Route path="/from-excel" element={<FromExcel />} />
+          <Route path="/from-json" element={<FromJSON />} />
         </Routes>
     </Router>
   );
