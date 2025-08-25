@@ -5,12 +5,18 @@ import TextArea from "../components/TextArea";
 import Papa from "papaparse";
 import { useEffect } from "react";
 import { useState } from "react";
-import { retrieveSQLfromCSV , downloadSQL} from "../utils/Function";
-
+import { retrieveSQLfromCSV , downloadSQL , copySQL} from "../utils/Function";
+import '../style/pages/FromCSV.css'
+import AreaForPaste from "../components/AreaForPaste";
 
 const FromCSV = () => {
 
      const [sqlContent , setSqlContent] = useState("");
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const onClose = ()=>{
+      setIsModalOpen(false);
+    }
 
 
     const handleUpload = (event) => {
@@ -24,6 +30,7 @@ const FromCSV = () => {
     };
 
     const handleCopy = () => {
+        copySQL(sqlContent);
     };
 
     const handleDownload = () => {
@@ -31,6 +38,7 @@ const FromCSV = () => {
     };
 
     const handlePaste = () => {
+      setIsModalOpen(true);
     };
 
 
@@ -49,6 +57,7 @@ const FromCSV = () => {
       <Filemenu sqlContent={sqlContent} handleUpload={handleUpload} handleCopy={handleCopy} handleDownload={handleDownload} handlePaste={handlePaste} fileExtension={".csv"} />
       <br/>
       <TextArea placeholder="Your SQL script will appear here..." sqlContent={sqlContent} />
+      <AreaForPaste isOpen={isModalOpen} onClose={onClose} setSqlContent={setSqlContent} />
     </div>
   );
 };

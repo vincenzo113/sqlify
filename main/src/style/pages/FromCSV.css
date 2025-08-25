@@ -1,0 +1,79 @@
+/* src/style/pages/FromCSV.css */
+
+.from-csv-container {
+  max-width: 900px;
+  margin: 0 auto;              /* centra il contenuto */
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+.from-csv-container h1 {
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 2rem;
+  color: #007bff;
+}
+
+.from-csv-container p {
+  text-align: center;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.menu-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.menu-button {
+  padding: 10px 15px;
+  border: 2px solid #007bff;
+  border-radius: 5px;
+  background-color: white;
+  color: #007bff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.menu-button:disabled {
+  border-color: #aaa;
+  color: #aaa;
+  cursor: not-allowed;
+}
+
+.menu-button:hover:not(:disabled) {
+  background-color: #007bff;
+  color: white;
+}
+
+.text-area-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.text-area-wrapper textarea {
+  width: 80%;
+  max-width: 800px;
+  min-width: 300px;
+  height: 300px;
+  padding: 15px;
+  font-family: 'Courier New', monospace;
+  font-size: 16px;
+  line-height: 1.5;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  resize: vertical;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.text-area-wrapper textarea:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0,123,255,0.5);
+}

@@ -24,3 +24,13 @@ export const downloadSQL = (content)=>{
     a.click();
     document.body.removeChild(a);
 }
+
+
+
+
+export const copySQL = (content) => {
+    navigator.clipboard.writeText(content);
+    alert("SQL copied to clipboard!");
+}
+
+

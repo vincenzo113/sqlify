@@ -6,7 +6,6 @@ const TextArea = ({ sqlContent }) => {
             placeholder="Your SQL script will appear here..."
             className="text-area sql-output" 
             value={sqlContent} 
-            readOnly 
             rows={10} 
             cols={50} 
         />
