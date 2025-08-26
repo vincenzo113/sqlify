@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/sqlify/static/css/main.99057d25.css",
+    "main.js": "/sqlify/static/js/main.0859e8eb.js",
+    "index.html": "/sqlify/index.html",
+    "main.99057d25.css.map": "/sqlify/static/css/main.99057d25.css.map",
+    "main.0859e8eb.js.map": "/sqlify/static/js/main.0859e8eb.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.99057d25.css",
+    "static/js/main.0859e8eb.js"
+  ]
+}
