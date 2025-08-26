@@ -1,8 +1,7 @@
 
 
-export const retrieveSQLfromCSV = (headerData,csvData)=>{
-
-    const table_name = 'table_name'
+export const retrieveSQLfromCSV = (headerData,csvData ,table_name)=>{
+    if(!table_name) table_name = 'table_name'
     const createTableSQL = `CREATE TABLE ${table_name} (${headerData.map(field => `${field} VARCHAR`).join(", ")});`;
     const insertSQL = csvData.map(row => {
         const values = headerData.map(field => `'${row[field] || ''}'`).join(", ");

@@ -6,7 +6,8 @@ import AreaForPaste from "../components/AreaForPaste";
 import * as XLSX from "xlsx";
 import TextArea from "../components/TextArea";
 import "../style/pages/FromExcel.css";
-
+import TableCols from "../components/TableCols";
+import TableNameField from "../components/TableNameField";
 
 const FromExcel = () => {
   const [sqlContent, setSqlContent] = useState("");
@@ -14,7 +15,8 @@ const FromExcel = () => {
   const [sheetNames, setSheetNames] = useState([]);
   const [selectedSheet, setSelectedSheet] = useState("");
   const [workbook, setWorkbook] = useState(null);
-
+  const [csvData , setCSVData] = useState() ; 
+  const [cols , setCols] = useState([]); 
   const onClose = () => {
     setIsModalOpen(false);
   };
@@ -29,11 +31,12 @@ const FromExcel = () => {
       setWorkbook(wb);
       setSheetNames(wb.SheetNames);
       setSelectedSheet(wb.SheetNames[0]);
-
-      // Generate SQL for the first sheet by default
+      // Set the columns for the first sheet by default
       const ws = wb.Sheets[wb.SheetNames[0]];
       const dataObjects = XLSX.utils.sheet_to_json(ws);
+      setCSVData(dataObjects);
       const headers = dataObjects.length > 0 ? Object.keys(dataObjects[0]) : [];
+      setCols(headers);
       const sql = retrieveSQLfromCSV(headers, dataObjects);
       setSqlContent(sql);
     };
@@ -88,6 +91,10 @@ const FromExcel = () => {
               handlePaste={handlePaste}
               fileExtension=".xlsx"
             />
+            {sqlContent.trim() && (
+<TableNameField onTableNameChange = {(updatedTableName)=>{setSqlContent(retrieveSQLfromCSV(cols , csvData , updatedTableName.trim()))
+}}/>
+)}
 
             <div className="textarea-section">
 
@@ -119,6 +126,16 @@ const FromExcel = () => {
               setSqlContent={setSqlContent}
               extension={"Excel"}
             />
+          </div>
+          <div>
+            {sqlContent.trim() && (
+              <TableCols
+                cols={cols}
+                onColsChange={(selectedCols) => {
+                  setSqlContent(retrieveSQLfromCSV(selectedCols, csvData));
+                }}
+              />
+            )}
           </div>
         </div>
       </div>

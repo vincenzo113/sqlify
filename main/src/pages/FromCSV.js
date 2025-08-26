@@ -9,6 +9,8 @@ import { retrieveSQLfromCSV , downloadSQL , copySQL} from "../utils/Function";
 import '../style/pages/FromCSV.css'
 import AreaForPaste from "../components/AreaForPaste";
 import TableCols from "../components/TableCols";
+import TableNameField from "../components/TableNameField";
+
 
 const FromCSV = () => {
 
@@ -61,51 +63,56 @@ const FromCSV = () => {
 
 
   return (
-    <div className="from-csv-page">
-      <Navbar />
-      <div className="from-csv-content">
-        <div className="from-csv-header">
-          <h1 className="from-csv-title">CSV to SQL</h1>
-          <p className="from-csv-description">
-            Upload a CSV file or paste your spreadsheet data into this tool.
-            This app generates SQL <code>CREATE TABLE</code> and{" "}
-            <code>INSERT INTO</code> statements that you can copy or download.
-            Run the SQL in your database and start querying your data.
-          </p>
-          <div className="from-csv-card">
-            <Filemenu
-              sqlContent={sqlContent}
-              handleUpload={handleUpload}
-              handleCopy={handleCopy}
-              handleDownload={handleDownload}
-              handlePaste={handlePaste}
-              fileExtension=".csv"
-            />
-            <div className="from-csv-card textarea-section">
-              <TextArea
-                placeholder="Your SQL script will appear here..."
-                sqlContent={sqlContent}
-              />
-            </div>
-            <AreaForPaste
-              isOpen={isModalOpen}
-              onClose={onClose}
-              setSqlContent={setSqlContent}
-              extension={"CSV"}
-            />
-          </div>
-        </div>
-      </div>
-      {sqlContent.trim() && (
-        <TableCols
-          cols={cols}
-          onColsChange={(selectedCols) => {
-            setSqlContent(retrieveSQLfromCSV(selectedCols, csvData));
-          }}
-        />
-      )}
-    </div>
-  );
+<div className="from-csv-page">
+<Navbar />
+<div className="from-csv-content">
+<div className="from-csv-header">
+<h1 className="from-csv-title">CSV to SQL</h1>
+<p className="from-csv-description">
+ Upload a CSV file or paste your spreadsheet data into this tool.
+ This app generates SQL <code>CREATE TABLE</code> and{" "}
+<code>INSERT INTO</code> statements that you can copy or download.
+ Run the SQL in your database and start querying your data.
+</p>
+<div className="from-csv-card">
+<Filemenu
+sqlContent={sqlContent}
+handleUpload={handleUpload}
+handleCopy={handleCopy}
+handleDownload={handleDownload}
+handlePaste={handlePaste}
+fileExtension=".csv"
+/>
+{sqlContent.trim() && (
+<TableNameField onTableNameChange = {(updatedTableName)=>{setSqlContent(retrieveSQLfromCSV(cols , csvData , updatedTableName.trim()))
+}}/>
+)}
+<div className="from-csv-card textarea-section">
+<TextArea
+placeholder="Your SQL script will appear here..."
+sqlContent={sqlContent}
+/>
+</div>
+<AreaForPaste
+isOpen={isModalOpen}
+onClose={onClose}
+setSqlContent={setSqlContent}
+extension={"CSV"}
+/>
+</div>
+{/* SPOSTA QUI IL TableCols */}
+{sqlContent.trim() && (
+<TableCols
+cols={cols}
+onColsChange={(selectedCols) => {
+setSqlContent(retrieveSQLfromCSV(selectedCols, csvData));
+ }}
+/>
+ )}
+</div>
+</div>
+</div>
+ );
 };
 
 export default FromCSV;
