@@ -8,11 +8,14 @@ import { useState } from "react";
 import { retrieveSQLfromCSV , downloadSQL , copySQL} from "../utils/Function";
 import '../style/pages/FromCSV.css'
 import AreaForPaste from "../components/AreaForPaste";
+import TableCols from "../components/TableCols";
 
 const FromCSV = () => {
 
      const [sqlContent , setSqlContent] = useState("");
-    const [isModalOpen, setIsModalOpen] = useState(false);
+     const [isModalOpen, setIsModalOpen] = useState(false);
+     const [cols , setCols] = useState([]); //Colonne del CSV
+     const [csvData , setCSVData] = useState() ; //Dati CSV
 
     const onClose = ()=>{
       setIsModalOpen(false);
@@ -34,8 +37,9 @@ const FromCSV = () => {
       })
       // Rimuove righe completamente vuote
       .filter(row => Object.values(row).some(value => value !== null));
-
-    setSqlContent(retrieveSQLfromCSV(results.meta.fields, cleanedData));
+      setCols(results.meta.fields); //Settiamo le colonne a tutta l'intestazione del csv
+      setCSVData(cleanedData); //Salvo i dati CSV
+      setSqlContent(retrieveSQLfromCSV(results.meta.fields, cleanedData));
   }
 });
     };
@@ -92,6 +96,14 @@ const FromCSV = () => {
           </div>
         </div>
       </div>
+      {sqlContent.trim() && (
+        <TableCols
+          cols={cols}
+          onColsChange={(selectedCols) => {
+            setSqlContent(retrieveSQLfromCSV(selectedCols, csvData));
+          }}
+        />
+      )}
     </div>
   );
 };
