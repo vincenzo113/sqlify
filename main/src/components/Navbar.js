@@ -15,9 +15,7 @@ const Navbar = () => {
                 <li className="navbar-item">
                     <Link to="/from-excel" className="navbar-link">Import from Excel</Link>
                 </li>
-                <li className="navbar-item">
-                    <Link to="/from-json" className="navbar-link">Import from JSON</Link>
-                </li>
+                
             </ul>
             
         </nav>
