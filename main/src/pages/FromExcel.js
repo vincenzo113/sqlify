@@ -78,10 +78,8 @@ const FromExcel = () => {
             <code>INSERT INTO</code> statements that you can copy or download.
             Run the SQL in your database and start querying your data.
           </p>
-        </div>
 
-        <div className="from-excel-sections">
-          <div className="from-excel-card filemenu-section">
+          <div className="from-excel-card">
             <Filemenu
               sqlContent={sqlContent}
               handleUpload={handleUpload}
@@ -90,40 +88,40 @@ const FromExcel = () => {
               handlePaste={handlePaste}
               fileExtension=".xlsx"
             />
-          </div>
 
-          <div className="from-excel-card textarea-section">
+            <div className="textarea-section">
 
-            {sheetNames.length > 1 && (
-              <div className="from-excel-sheet-select" style={{ marginBottom: '1.5rem', textAlign: 'center' }}>
-                <label htmlFor="sheet-select" style={{ color: '#000', fontWeight: 600, marginRight: 8 }}>Select sheet:</label>
-                <select
-                  id="sheet-select"
-                  value={selectedSheet}
-                  onChange={handleSheetChange}
-                  style={{ padding: '0.5rem', borderRadius: 4 }}
-                >
-                  {sheetNames.map((name) => (
-                    <option key={name} value={name}>{name}</option>
-                  ))}
-                </select>
-              </div>
-            )}
+              {sheetNames.length > 1 && (
+                <div className="from-excel-sheet-select" style={{ marginBottom: '1.5rem', textAlign: 'center' }}>
+                  <label htmlFor="sheet-select" style={{ color: '#000', fontWeight: 600, marginRight: 8 }}>Select sheet:</label>
+                  <select
+                    id="sheet-select"
+                    value={selectedSheet}
+                    onChange={handleSheetChange}
+                    style={{ padding: '0.5rem', borderRadius: 4 }}
+                  >
+                    {sheetNames.map((name) => (
+                      <option key={name} value={name}>{name}</option>
+                    ))}
+                  </select>
+                </div>
+              )}
 
-            <TextArea
-              placeholder="Your SQL script will appear here..."
-              sqlContent={sqlContent}
+              <TextArea
+                placeholder="Your SQL script will appear here..."
+                sqlContent={sqlContent}
+              />
+            </div>
+
+            <AreaForPaste
+              isOpen={isModalOpen}
+              onClose={onClose}
+              setSqlContent={setSqlContent}
+              extension={"Excel"}
             />
           </div>
         </div>
       </div>
-
-      <AreaForPaste
-        isOpen={isModalOpen}
-        onClose={onClose}
-        setSqlContent={setSqlContent}
-        extension={"Excel"}
-      />
     </div>
   );
 };

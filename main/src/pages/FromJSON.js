@@ -1,11 +1,11 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import Filemenu from "../components/Filemenu";
-import { retrieveSQLfromCSV , downloadSQL , copySQL} from "../utils/Function";
+import { retrieveSQLfromCSV , downloadSQL , copySQL , retrieveSQLfromJSON} from "../utils/Function";
 import TextArea from "../components/TextArea";
 import { useState } from "react";
 import AreaForPaste from "../components/AreaForPaste";
-
+import "../style/pages/FromJSON.css"
 
 
 const FromJSON = () => {
@@ -21,7 +21,8 @@ const onClose = ()=>{
 
 //filemenu handlers: 
 const handleUpload = (event)=>{
-
+const file = event.target.files[0]; //Ottengo il file caricato 
+retrieveSQLfromJSON(file);
 }
 
 
@@ -49,7 +50,7 @@ setIsModalOpen(true);
                     <p className="from-json-description">
                         Convert your JSON data into SQL queries effortlessly.
                     </p>
-                    <div>
+                    <div className="from-json-card">
                         <Filemenu
               sqlContent={sqlContent}
               handleUpload={handleUpload}
@@ -58,7 +59,7 @@ setIsModalOpen(true);
               handlePaste={handlePaste}
               fileExtension=".json"
             />
-            <div className="from-csv-card textarea-section">
+            <div className="from-json-card textarea-section">
             <TextArea
               placeholder="Your SQL script will appear here..."
               sqlContent={sqlContent}

@@ -68,10 +68,7 @@ const FromCSV = () => {
             <code>INSERT INTO</code> statements that you can copy or download.
             Run the SQL in your database and start querying your data.
           </p>
-        </div>
-
-        <div className="from-csv-sections">
-          <div className="from-csv-card filemenu-section">
+          <div className="from-csv-card">
             <Filemenu
               sqlContent={sqlContent}
               handleUpload={handleUpload}
@@ -80,23 +77,21 @@ const FromCSV = () => {
               handlePaste={handlePaste}
               fileExtension=".csv"
             />
-          </div>
-
-          <div className="from-csv-card textarea-section">
-            <TextArea
-              placeholder="Your SQL script will appear here..."
-              sqlContent={sqlContent}
+            <div className="from-csv-card textarea-section">
+              <TextArea
+                placeholder="Your SQL script will appear here..."
+                sqlContent={sqlContent}
+              />
+            </div>
+            <AreaForPaste
+              isOpen={isModalOpen}
+              onClose={onClose}
+              setSqlContent={setSqlContent}
+              extension={"CSV"}
             />
           </div>
         </div>
       </div>
-
-      <AreaForPaste
-        isOpen={isModalOpen}
-        onClose={onClose}
-        setSqlContent={setSqlContent}
-        extension={"CSV"}
-      />
     </div>
   );
 };

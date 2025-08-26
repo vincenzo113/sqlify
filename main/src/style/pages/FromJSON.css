@@ -1,28 +1,28 @@
 /* FromExcel.css */
 
 /* Container principale */
-.from-csv-page {
+.from-json-page {
   min-height: 100vh;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 /* Main content wrapper */
-.from-csv-content {
+.from-json-content {
   padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;
 }
 
 /* Header section */
-.from-csv-header {
+.from-json-header {
   text-align: center;
   margin-bottom: 3rem;
   padding: 2rem 0;
   animation: slideInFromTop 0.8s ease-out;
 }
 
-.from-csv-title {
+.from-json-title {
   font-size: clamp(2rem, 5vw, 3.5rem);
   font-weight: 800;
   background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 100%);
@@ -35,7 +35,7 @@
   text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.from-csv-description {
+.from-json-description {
   font-size: 1.125rem;
   color: rgba(255, 255, 255, 0.9);
   max-width: 800px;
@@ -46,17 +46,18 @@
 }
 
 /* Main sections container */
-.from-csv-sections {
+.from-json-sections {
   display: flex;
   flex-direction: column;
   gap: 2rem;
 }
 
 /* Card styling */
-.from-csv-card {
+.from-json-card {
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(20px);
   border-radius: 20px;
+  padding: 2rem;
   box-shadow: 
     0 20px 25px -5px rgba(0, 0, 0, 0.1),
     0 10px 10px -5px rgba(0, 0, 0, 0.04);
@@ -66,7 +67,7 @@
   opacity: 0;
 }
 
-.from-csv-card:hover {
+.from-json-card:hover {
   transform: translateY(-8px);
   box-shadow: 
     0 32px 64px -12px rgba(0, 0, 0, 0.25),
@@ -74,9 +75,9 @@
 }
 
 /* Staggered animations */
-.from-csv-card:nth-child(1) { animation-delay: 0.1s; }
-.from-csv-card:nth-child(2) { animation-delay: 0.2s; }
-.from-csv-card:nth-child(3) { animation-delay: 0.3s; }
+.from-json-card:nth-child(1) { animation-delay: 0.1s; }
+.from-json-card:nth-child(2) { animation-delay: 0.2s; }
+.from-json-card:nth-child(3) { animation-delay: 0.3s; }
 
 /* File menu section */
 .filemenu-section {
@@ -114,7 +115,7 @@
 }
 
 /* Loading states */
-.from-excel-loading {
+.from-json-loading {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -123,7 +124,7 @@
   font-size: 1.1rem;
 }
 
-.from-excel-loading::after {
+.from-json-loading::after {
   content: '';
   width: 24px;
   height: 24px;
@@ -135,7 +136,7 @@
 }
 
 /* Success/Error notifications */
-.from-excel-notification {
+.from-json-notification {
   padding: 1rem 1.5rem;
   border-radius: 12px;
   margin-bottom: 1rem;
@@ -146,13 +147,13 @@
   animation: slideInFromRight 0.4s ease-out;
 }
 
-.from-csv-success {
+.from-json-success {
   background: linear-gradient(135deg, #059669 0%, #047857 100%);
   color: white;
   box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3);
 }
 
-.from-csv-error {
+.from-json-error {
   background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
   color: white;
   box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
@@ -208,14 +209,14 @@
 }
 
 /* Focus states per accessibilità */
-.from-csv-card:focus-within {
+.from-json-card:focus-within {
   outline: 3px solid #4f46e5;
   outline-offset: 3px;
 }
 
 /* Responsive Design */
 @media (min-width: 768px) {
-  .from-csv-sections {
+  .from-json-sections {
     display: grid;
     grid-template-columns: 1fr;
     gap: 2.5rem;
@@ -223,42 +224,42 @@
 }
 
 @media (min-width: 1024px) {
-  .from-csv-content {
+  .from-json-content {
     padding: 3rem 2rem;
   }
 
-  .from-csv-card {
+  .from-json-card {
     padding: 2.5rem;
   }
 }
 
 @media (max-width: 768px) {
-  .from-csv-content {
+  .from-json-content {
     padding: 1rem;
   }
 
-  .from-csv-header {
+  .from-json-header {
     padding: 1rem 0;
     margin-bottom: 2rem;
   }
 
-  .from-csv-description {
+  .from-json-description {
     font-size: 1rem;
   }
 
-  .from-csv-card {
+  .from-json-card {
     padding: 1.5rem;
     border-radius: 16px;
   }
 }
 
 @media (max-width: 480px) {
-  .from-csv-card {
+  .from-json-card {
     padding: 1rem;
     border-radius: 12px;
   }
 
-  .from-csv-sections {
+  .from-json-sections {
     gap: 1.5rem;
   }
 }
@@ -267,31 +268,31 @@
 
 
 /* Utility classes */
-.from-csv-fade-in {
+.from-json-fade-in {
   animation: slideInFromBottom 0.6s ease-out forwards;
   opacity: 0;
 }
 
-.from-csv-pulse {
+.from-json-pulse {
   animation: pulse 2s infinite;
 }
 
-.from-csv-hidden {
+.from-json-hidden {
   display: none;
 }
 
-.from-csv-visible {
+.from-json-visible {
   display: block;
 }
 
 /* Print styles */
 @media print {
-  .from-csv-page {
+  .from-json-page {
     background: white;
     color: black;
   }
 
-  .from-csv-card {
+  .from-json-card {
     background: white;
     box-shadow: none;
     border: 1px solid #ccc;

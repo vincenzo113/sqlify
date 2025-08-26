@@ -34,3 +34,11 @@ export const copySQL = (content) => {
 }
 
 
+
+export const retrieveSQLfromJSON = (file)=>{
+    const obj = JSON.parse(file);
+    console.log("Oggetto caricato: " , obj); //Log 
+
+}
+
+
