@@ -95,6 +95,7 @@ const FromCSV = () => {
         isOpen={isModalOpen}
         onClose={onClose}
         setSqlContent={setSqlContent}
+        extension={"CSV"}
       />
     </div>
   );

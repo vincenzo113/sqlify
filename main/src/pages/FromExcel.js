@@ -122,6 +122,7 @@ const FromExcel = () => {
         isOpen={isModalOpen}
         onClose={onClose}
         setSqlContent={setSqlContent}
+        extension={"Excel"}
       />
     </div>
   );

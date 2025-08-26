@@ -4,7 +4,7 @@ import Papa from "papaparse";
 import { retrieveSQLfromCSV } from "../utils/Function";
 import '../style/components/AreaForPaste.css';
 
-const AreaForPaste = ({ isOpen, onClose, setSqlContent }) => {
+const AreaForPaste = ({ isOpen, onClose, setSqlContent , extension }) => {
   const [pastedData, setPastedData] = useState("");
 
   if (!isOpen) return null; // non renderizza nulla se la modale è chiusa
@@ -24,12 +24,11 @@ const handleClose = () => {
   return (
     <div className="modal-overlay">
       <div className="modal-content">
-        <h2>Paste your CSV data</h2>
+        <h2>Paste your {extension} data</h2>
         <textarea
           value={pastedData}
           onChange={(e) => setPastedData(e.target.value)}
-          placeholder="Paste your CSV data here..."
-          rows={10}
+          placeholder={`Paste your ${extension} data here...`}          rows={10}
         />
         <div className="modal-buttons">
           <button onClick={handleConvert} disabled={!pastedData.trim()}>
